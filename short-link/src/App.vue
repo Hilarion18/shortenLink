@@ -1,5 +1,10 @@
 <template>
   <div id="app">
+    <div class="container text-left home-app">
+      <router-link class="home-app" to="/">
+        <h2>Short Link Web</h2>
+      </router-link>
+    </div>
     <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
@@ -28,5 +33,10 @@
 
 #nav a.router-link-exact-active {
   color: #42b983;
+}
+.home-app {
+  margin-top: 15px;
+  margin-bottom: -20px;
+  color:rgb(241, 6, 123)
 }
 </style>

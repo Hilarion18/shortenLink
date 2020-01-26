@@ -1,10 +1,10 @@
 
 import express from 'express';
-import { getLinks, hashLink } from '../controllers/link'
+import { getLinks, createLink } from '../controllers/link'
 const router = express.Router();
 
 /* GET users listing. */
 router.get('/', getLinks);
-router.post('/create', hashLink);
+router.post('/create', createLink);
 
 export default router

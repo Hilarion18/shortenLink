@@ -3,6 +3,7 @@ import Bitly from '../helpers/hashLink'
 
 module.exports = {
   getLinks: (req,res) => {
+    console.log(`req.headers`, req.headers)
     Link.find({})
     .then((data) => {
       res.status(200).json({
@@ -17,7 +18,8 @@ module.exports = {
       })
     })
   },
-  hashLink: (req,res) => {
+  createLink: (req,res) => {
+    console.log(`req.body`, req.body)
     Bitly.shorten({longUrl: req.body.longUrl}, function(err, results) {
       // Do something with your new, shorter url...
       if (err) {
@@ -45,6 +47,12 @@ module.exports = {
               err,
               message: `data failure to get`
             })
+          })
+        } else if (result.status_code === 500) {
+          const msg = result.status_txt
+          res.status(result.status_code).json({
+            msg,
+            message: `wrong url`
           })
         } else {
           res.status(result.status_code).json({
