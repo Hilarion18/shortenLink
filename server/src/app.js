@@ -20,7 +20,7 @@ mongoose.connect('mongodb://localhost:27017/shortLink', { useNewUrlParser: true,
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
-  console.log('mongo connected')
+  // console.log('mongo connected')
 })
 // var mongodUri = `mongodb://${process.env.MLAB_USER}:${process.env.MLAB_PASS}@ds151943.mlab.com:51943/short_link`
 // mongoose.connect(mongodUri, {

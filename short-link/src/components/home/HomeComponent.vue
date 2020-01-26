@@ -15,10 +15,14 @@
         <button class="button button--winona button--border-thin button--round-s" data-text="generate link" @click="addLink" ><span>generate link</span></button>
       </div>
     </div>
-    <div class="container">
+    <div class="container home-content">
+      <div class="row">
+        <h5 class="text-left">Previously shortened by you</h5>
+        <a href="" class="clear-history" @click="removeAllLinks">Clear history</a>
+      </div>
       <table class="item-table">
         <thead>
-          <th class="th first-th" max-length="50">Link</th>
+          <th class="first-th" max-length="50">Link</th>
           <th class="th">Visits</th>
           <th class="th">Last Visited</th>
         </thead>
@@ -31,7 +35,7 @@
                 <div class="text-cursor">click to copy this link</div>
               </div>
               <a class="long-url" v-if="link.longUrl.length<50">{{link.longUrl}}</a>
-              <a v-else>{{ link.longUrl.substring(0,50)+".." }}</a>
+              <a v-else>{{ link.longUrl.substring(0,50)+"..." }}</a>
             </td>
             <td class="visit">will be update soon</td>
             <td class="last-visited">will be update soon</td>
@@ -58,13 +62,20 @@ export default {
       link: {
         longUrl: '',
       },
-      linkToCopy: ''
+      linkToCopy: '',
+      isLogin: false
     }
   },
   // template: `
   //   <textarea v-model="internalValue" @keydown="onKeyDown"></textarea>
   // `,
   methods: {
+    checkLogin: function () {
+      if (localStorage.getItem("token")) {
+        this.isLogin = true
+      }
+    },
+
     addLink: function () {
       axios({
         method: 'POST',
@@ -75,31 +86,36 @@ export default {
         }
       })
         .then((result) => {
-          this.getLinkData()
-          console.log(`result`, result)
+          // if (this.isLogin) {
+          //   this.getLinkData()
+          // } else {
+            this.getLinkData()
+            this.links.push(result.data.data)
+          // }
         })
         .catch((err) => {
-          console.log(`err`, err)
-          alert('please use the right url')
+          // alert(err.message)
+          alert('there is something wrong, please try again later')
         })
     },
 
     getLinkData: function () {
-      axios({
-        method: 'GET',
-        url: `${config.port}/link`,
-        headers: {
-          // id: localStorage.get('userId'),
-          // token: localStorage.getItem('token')
-        }
-      })
-        .then((value) => {
-          this.links = value.data.data
+      // if (this.isLogin) {
+        axios({
+          method: 'GET',
+          url: `${config.port}/link`,
+          headers: {
+            // id: localStorage.get('userId'),
+            // token: localStorage.getItem('token')
+          }
         })
-        .catch((err) => {
-          alert(err.message)
-          console.log(`error to get links ` + err)
-        })
+          .then((value) => {
+            this.links = value.data.data
+          })
+          .catch((err) => {
+            alert(err.message)
+          })
+      // }
     },
 
     copyToClipboard: function () {
@@ -120,6 +136,27 @@ export default {
       testingCodeToCopy.setAttribute('type', 'hidden')
       window.getSelection().removeAllRanges()
     },
+
+    removeAllLinks: function () {
+      if (this.isLogin) {
+        axios({
+          method: `DELETE`,
+          url: `${config.port}/link/deleteAll`,
+          headers: {
+            // id: localStorage.get('userId'),
+            // token: localStorage.getItem('token')
+          }
+        })
+          .then((value) => {
+            // this.links = []
+          })
+          .catch((err) => {
+            alert(err.message)
+          })
+      } else {
+        this.links = []
+      }
+    }
   },
   // watch() {
   //   this.links
@@ -127,6 +164,7 @@ export default {
 
   created() {
     this.getLinkData()
+    this.checkLogin()
   },
 }
 </script>
@@ -147,6 +185,10 @@ export default {
   }
   .first-th {
     text-align: left;
+    width: 418px;
+  }
+  .th {
+    width: 161px;
   }
   .long-url {
     white-space: nowrap;
@@ -257,6 +299,12 @@ export default {
   }
   .button--round-s {
     border-radius: 5px;
+  }
+  .home-content {
+    margin-top: 20px;
+  }
+  .clear-history {
+    margin-left: 10px;
   }
   /* .row {
     padding-bottom: 10px;

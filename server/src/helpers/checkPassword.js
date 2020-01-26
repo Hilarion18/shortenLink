@@ -5,12 +5,11 @@ function checkPassword (salt, password, email) {
       const emailPassword = email + password
       bcryptjs.compare(emailPassword, salt, function (err, data) {
           if (data) {
-              console.log(`masuk akses password bener `+data);
+            //   console.log(`access granted `+data);
               
               resolve(data)
           } else {
-              console.log(`masuk gagal akses user `+err);
-              
+            //   console.log(`access failed `+err);
               reject(err)
           }
       });

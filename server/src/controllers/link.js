@@ -3,7 +3,6 @@ import Bitly from '../helpers/hashLink'
 
 module.exports = {
   getLinks: (req,res) => {
-    console.log(`req.headers`, req.headers)
     Link.find({})
     .then((data) => {
       res.status(200).json({
@@ -19,7 +18,6 @@ module.exports = {
     })
   },
   createLink: (req,res) => {
-    console.log(`req.body`, req.body)
     Bitly.shorten({longUrl: req.body.longUrl}, function(err, results) {
       // Do something with your new, shorter url...
       if (err) {
@@ -60,14 +58,40 @@ module.exports = {
           })
         }
       }
-      console.log(`err`, err)
-      console.log(`results`, results)
     });
   },
   deleteOne: (req,res) => {
-
+    Link.findOne({ _id: req.params.id})
+    .then((link) => {
+      
+        Link.deleteOne({_id: req.params.id})
+        .then((result) => {
+            res.status(200).json({
+                result,
+                message: `Link detail has been deleted`
+            })
+        })
+    })
+    .catch((err) => {
+        res.status(500).json({
+          err,
+            message: `Link failed to delete`
+        })
+    })
   },
   deleteAll: (req,res) => {
-    
+    Link.remove({})
+      .then((data) => {
+        res.status(200).json({
+          data,
+          message: `all data has been removed`
+        })
+      })
+      .catch((err) => {
+        res.status(500).json({
+          err,
+          message: `data failure to remove`
+        })
+      })
   }
 }
