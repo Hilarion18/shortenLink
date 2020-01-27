@@ -78,45 +78,45 @@ export default {
     },
 
     addLink: function () {
-      axios({
-        method: 'POST',
-        url: `${config.port}link`,
-        data: this.link,
-        headers: {
-          token: localStorage.getItem("token")
-        }
-      })
-        .then((result) => {
-          // if (this.isLogin) {
-          //   this.getLinkData()
-          // } else {
-            this.getLinkData()
-            this.links.push(result.data.data)
-          // }
-        })
-        .catch((err) => {
-          // alert(err.message)
-          alert('there is something wrong, please try again later')
-        })
+      // axios({
+      //   method: 'POST',
+      //   url: `${config.port}link`,
+      //   data: this.link,
+      //   headers: {
+      //     token: localStorage.getItem("token")
+      //   }
+      // })
+      //   .then((result) => {
+      //     // if (this.isLogin) {
+      //     //   this.getLinkData()
+      //     // } else {
+      //       this.getLinkData()
+      //       this.links.push(result.data.data)
+      //     // }
+      //   })
+      //   .catch((err) => {
+      //     // alert(err.message)
+      //     alert('there is something wrong, please try again later')
+      //   })
     },
 
     getLinkData: function () {
-      // if (this.isLogin) {
-        // axios({
-        //   method: 'GET',
-        //   url: `${config.port}/link`,
-        //   headers: {
-        //     // id: localStorage.get('userId'),
-        //     // token: localStorage.getItem('token')
-        //   }
-        // })
-        //   .then((value) => {
-        //     this.links = value.data.data
-        //   })
-        //   .catch((err) => {
-        //     alert(err.message)
-        //   })
-      // }
+      if (this.isLogin) {
+        axios({
+          method: 'GET',
+          url: `${config.port}/link`,
+          headers: {
+            // id: localStorage.get('userId'),
+            // token: localStorage.getItem('token')
+          }
+        })
+          .then((value) => {
+            this.links = value.data.data
+          })
+          .catch((err) => {
+            alert(err.message)
+          })
+      }
     },
 
     copyToClipboard: function () {
