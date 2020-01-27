@@ -5,7 +5,7 @@ const router = express.Router();
 
 /* GET users listing. */
 router.get('/', getLinks);
-router.post('/create', createLink);
-router.delete('/deleteAll', deleteAll)
+router.post('/', createLink);
+router.delete('/', deleteAll)
 
 export default router

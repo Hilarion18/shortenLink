@@ -48,8 +48,9 @@
 
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
-// import config from '@/config.js'
+import config from '@/config.js'
 import axios from 'axios'
+// import LinkService from '@/api/LinkService'
 
 export default {
   components: {
@@ -79,7 +80,7 @@ export default {
     addLink: function () {
       axios({
         method: 'POST',
-        url: `link/create`,
+        url: `${config.port}link`,
         data: this.link,
         headers: {
           token: localStorage.getItem("token")
@@ -103,7 +104,7 @@ export default {
       // if (this.isLogin) {
         axios({
           method: 'GET',
-          url: `link`,
+          url: `${config.port}/link`,
           headers: {
             // id: localStorage.get('userId'),
             // token: localStorage.getItem('token')
@@ -141,7 +142,7 @@ export default {
       if (this.isLogin) {
         axios({
           method: `DELETE`,
-          url: `link/deleteAll`,
+          url: `${config.port}/link`,
           headers: {
             // id: localStorage.get('userId'),
             // token: localStorage.getItem('token')
@@ -162,7 +163,12 @@ export default {
   //   this.links
   // },
 
-  created() {
+  async created() {
+    // try {
+    //   this.links = await LinkService.getLinkData()
+    // } catch (err) {
+    //   alert(err.message)
+    // }
     this.getLinkData()
     this.checkLogin()
   },
