@@ -72,9 +72,9 @@ export default {
   // `,
   methods: {
     checkLogin: function () {
-      if (localStorage.getItem("token")) {
-        this.isLogin = true
-      }
+      // if (localStorage.getItem("token")) {
+      //   this.isLogin = true
+      // }
     },
 
     addLink: function () {
@@ -102,20 +102,20 @@ export default {
 
     getLinkData: function () {
       // if (this.isLogin) {
-        axios({
-          method: 'GET',
-          url: `${config.port}/link`,
-          headers: {
-            // id: localStorage.get('userId'),
-            // token: localStorage.getItem('token')
-          }
-        })
-          .then((value) => {
-            this.links = value.data.data
-          })
-          .catch((err) => {
-            alert(err.message)
-          })
+        // axios({
+        //   method: 'GET',
+        //   url: `${config.port}/link`,
+        //   headers: {
+        //     // id: localStorage.get('userId'),
+        //     // token: localStorage.getItem('token')
+        //   }
+        // })
+        //   .then((value) => {
+        //     this.links = value.data.data
+        //   })
+        //   .catch((err) => {
+        //     alert(err.message)
+        //   })
       // }
     },
 
@@ -139,24 +139,24 @@ export default {
     },
 
     removeAllLinks: function () {
-      if (this.isLogin) {
-        axios({
-          method: `DELETE`,
-          url: `${config.port}/link`,
-          headers: {
-            // id: localStorage.get('userId'),
-            // token: localStorage.getItem('token')
-          }
-        })
-          .then((value) => {
-            // this.links = []
-          })
-          .catch((err) => {
-            alert(err.message)
-          })
-      } else {
-        this.links = []
-      }
+      // if (this.isLogin) {
+      //   axios({
+      //     method: `DELETE`,
+      //     url: `${config.port}/link`,
+      //     headers: {
+      //       // id: localStorage.get('userId'),
+      //       // token: localStorage.getItem('token')
+      //     }
+      //   })
+      //     .then((value) => {
+      //       // this.links = []
+      //     })
+      //     .catch((err) => {
+      //       alert(err.message)
+      //     })
+      // } else {
+      //   this.links = []
+      // }
     }
   },
   // watch() {
@@ -170,7 +170,7 @@ export default {
     //   alert(err.message)
     // }
     this.getLinkData()
-    this.checkLogin()
+    // this.checkLogin()
   },
 }
 </script>
