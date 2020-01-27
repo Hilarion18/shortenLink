@@ -48,9 +48,9 @@
 
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
-import config from '@/config.js'
+// import config from '@/config.js'
 import axios from 'axios'
-// import LinkService from '@/api/LinkService'
+import LinkService from '@/api/LinkService'
 
 export default {
   components: {
@@ -101,22 +101,22 @@ export default {
     },
 
     getLinkData: function () {
-      if (this.isLogin) {
-        axios({
-          method: 'GET',
-          url: `${config.port}/link`,
-          headers: {
-            // id: localStorage.get('userId'),
-            // token: localStorage.getItem('token')
-          }
-        })
-          .then((value) => {
-            this.links = value.data.data
-          })
-          .catch((err) => {
-            alert(err.message)
-          })
-      }
+      // if (this.isLogin) {
+      //   axios({
+      //     method: 'GET',
+      //     url: `${config.port}/link`,
+      //     headers: {
+      //       // id: localStorage.get('userId'),
+      //       // token: localStorage.getItem('token')
+      //     }
+      //   })
+      //     .then((value) => {
+      //       this.links = value.data.data
+      //     })
+      //     .catch((err) => {
+      //       alert(err.message)
+      //     })
+      // }
     },
 
     copyToClipboard: function () {
@@ -164,12 +164,12 @@ export default {
   // },
 
   async created() {
-    // try {
-    //   this.links = await LinkService.getLinkData()
-    // } catch (err) {
-    //   alert(err.message)
-    // }
-    this.getLinkData()
+    try {
+      this.links = await LinkService.getLinkData()
+    } catch (err) {
+      alert(err.message)
+    }
+    // this.getLinkData()
     // this.checkLogin()
   },
 }
