@@ -16,7 +16,6 @@ class LinkService {
           }
         })
         const data = res.data
-        console.log(`data`, data)
         resolve(
           data.data.map(link => ({
             ...link
