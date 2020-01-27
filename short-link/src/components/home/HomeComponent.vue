@@ -164,11 +164,11 @@ export default {
   // },
 
   async created() {
-    try {
-      this.links = await LinkService.getLinkData()
-    } catch (err) {
-      alert(err.message)
-    }
+    // try {
+    //   this.links = await LinkService.getLinkData()
+    // } catch (err) {
+    //   alert(err.message)
+    // }
     // this.getLinkData()
     // this.checkLogin()
   },
