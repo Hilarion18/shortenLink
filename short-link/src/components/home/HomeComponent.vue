@@ -48,9 +48,9 @@
 
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
-// import config from '@/config.js'
+import config from '@/config.js'
 import axios from 'axios'
-import LinkService from '@/api/LinkService'
+// import LinkService from '@/api/LinkService'
 
 export default {
   components: {
@@ -72,50 +72,50 @@ export default {
   // `,
   methods: {
     checkLogin: function () {
-      // if (localStorage.getItem("token")) {
-      //   this.isLogin = true
-      // }
+      if (localStorage.getItem("token")) {
+        this.isLogin = true
+      }
     },
 
     addLink: function () {
-      // axios({
-      //   method: 'POST',
-      //   url: `${config.port}link`,
-      //   data: this.link,
-      //   headers: {
-      //     token: localStorage.getItem("token")
-      //   }
-      // })
-      //   .then((result) => {
-      //     // if (this.isLogin) {
-      //     //   this.getLinkData()
-      //     // } else {
-      //       this.getLinkData()
-      //       this.links.push(result.data.data)
-      //     // }
-      //   })
-      //   .catch((err) => {
-      //     // alert(err.message)
-      //     alert('there is something wrong, please try again later')
-      //   })
+      axios({
+        method: 'POST',
+        url: `${config.port}/link`,
+        data: this.link,
+        headers: {
+          token: localStorage.getItem("token")
+        }
+      })
+        .then((result) => {
+          // if (this.isLogin) {
+          //   this.getLinkData()
+          // } else {
+            this.getLinkData()
+            this.links.push(result.data.data)
+          // }
+        })
+        .catch((err) => {
+          // alert(err.message)
+          alert('there is something wrong, please try again later')
+        })
     },
 
     getLinkData: function () {
       // if (this.isLogin) {
-      //   axios({
-      //     method: 'GET',
-      //     url: `${config.port}/link`,
-      //     headers: {
-      //       // id: localStorage.get('userId'),
-      //       // token: localStorage.getItem('token')
-      //     }
-      //   })
-      //     .then((value) => {
-      //       this.links = value.data.data
-      //     })
-      //     .catch((err) => {
-      //       alert(err.message)
-      //     })
+        axios({
+          method: 'GET',
+          url: `${config.port}/link`,
+          headers: {
+            // id: localStorage.get('userId'),
+            // token: localStorage.getItem('token')
+          }
+        })
+          .then((value) => {
+            this.links = value.data.data
+          })
+          .catch((err) => {
+            alert(err.message)
+          })
       // }
     },
 
@@ -139,24 +139,24 @@ export default {
     },
 
     removeAllLinks: function () {
-      // if (this.isLogin) {
-      //   axios({
-      //     method: `DELETE`,
-      //     url: `${config.port}/link`,
-      //     headers: {
-      //       // id: localStorage.get('userId'),
-      //       // token: localStorage.getItem('token')
-      //     }
-      //   })
-      //     .then((value) => {
-      //       // this.links = []
-      //     })
-      //     .catch((err) => {
-      //       alert(err.message)
-      //     })
-      // } else {
-      //   this.links = []
-      // }
+      if (this.isLogin) {
+        axios({
+          method: `DELETE`,
+          url: `${config.port}/link`,
+          headers: {
+            // id: localStorage.get('userId'),
+            // token: localStorage.getItem('token')
+          }
+        })
+          .then((value) => {
+            // this.links = []
+          })
+          .catch((err) => {
+            alert(err.message)
+          })
+      } else {
+        this.links = []
+      }
     }
   },
   // watch() {
@@ -169,7 +169,7 @@ export default {
     // } catch (err) {
     //   alert(err.message)
     // }
-    // this.getLinkData()
+    this.getLinkData()
     // this.checkLogin()
   },
 }
