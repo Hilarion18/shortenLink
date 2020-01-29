@@ -50,6 +50,7 @@
 <script>
 import config from '@/config.js'
 import axios from 'axios'
+// import LinkService from '@/api/LinkService'
 
 export default {
   components: {
@@ -79,7 +80,7 @@ export default {
     addLink: function () {
       axios({
         method: 'POST',
-        url: `${config.port}/link/create`,
+        url: `${config.port}/link`,
         data: this.link,
         headers: {
           token: localStorage.getItem("token")
@@ -141,7 +142,7 @@ export default {
       if (this.isLogin) {
         axios({
           method: `DELETE`,
-          url: `${config.port}/link/deleteAll`,
+          url: `${config.port}/link`,
           headers: {
             // id: localStorage.get('userId'),
             // token: localStorage.getItem('token')
@@ -162,9 +163,14 @@ export default {
   //   this.links
   // },
 
-  created() {
+  async created() {
+    // try {
+    //   this.links = await LinkService.getLinkData()
+    // } catch (err) {
+    //   alert(err.message)
+    // }
     this.getLinkData()
-    this.checkLogin()
+    // this.checkLogin()
   },
 }
 </script>

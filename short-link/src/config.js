@@ -1,5 +1,5 @@
 const config = {
-  port: `http://localhost:3000`
+  port: `api`
 }
 
 export default config
