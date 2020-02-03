@@ -1,13 +1,16 @@
 <template>
   <div id="app">
-    <div class="container text-left home-app">
-      <router-link class="home-app" to="/">
-        <h2>Short Link Web</h2>
-      </router-link>
-    </div>
-    <div id="nav">
-      <!-- <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link> -->
+    <div class="container">
+      <div class="d-flex justify-content-between">
+        <div>
+          <router-link class="head-page" to="/">
+            Welcome to shorten-link
+          </router-link>
+        </div>
+        <div class="head-page2">
+          The link shortener with a long name
+        </div>
+      </div>
     </div>
     <router-view/>
   </div>
@@ -19,7 +22,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  /* color: #2c3e50; */
 }
 
 #nav {
@@ -34,9 +37,27 @@
 #nav a.router-link-exact-active {
   color: #42b983;
 }
-.home-app {
-  margin-top: 15px;
-  margin-bottom: -20px;
-  color:rgb(241, 6, 123)
+
+.head-page {
+  margin-top: 20px;
+  margin-bottom: 30px;
+  font-family: Montserrat;
+  font-size: 47px;
+  color: #EB4A42;
+  text-decoration: underline;
+}
+
+.head-page2 {
+  margin-top: 23px;
+  margin-bottom: 30px;
+  font-family: roboto;
+  font-weight: 100;
+  font-size: 22px;
+  color: #AAAAAA;
+}
+
+.container {
+  padding-right: 100px;
+  padding-left: 100px;
 }
 </style>
